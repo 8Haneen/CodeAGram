@@ -5,20 +5,16 @@ from openai import OpenAI
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-# Load environment variables
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 
 if not api_key:
     raise ValueError("API key not found. Check your .env file.")
 
-# Initialize OpenAI client
 client = OpenAI(api_key=api_key)
 
-# Define FastAPI app
 app = FastAPI()
 
-# Define request model
 class TranslationRequest(BaseModel):
     source_code: str
     source_lang: str
@@ -42,8 +38,7 @@ async def translate_code(request: TranslationRequest):
     except Exception as e:
         return {"error": str(e)}        
 
-# Retrieve Render-assigned PORT and run Uvicorn
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))  # Default to 8000 if PORT is not set
+    port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)
 
