@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Code Converter</title>
+    <title>CodeAGram</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
         textarea { width: 80%; height: 100px; margin: 10px; }
@@ -36,12 +36,14 @@
     <pre id="output"></pre>
 
     <script>
+        const API_URL = "https://codeagram-euky.onrender.com";
+
         async function translateCode() {
             const code = document.getElementById("codeInput").value;
             const sourceLang = document.getElementById("sourceLang").value;
             const targetLang = document.getElementById("targetLang").value;
 
-            const response = await fetch("http://127.0.0.1:8000/translate", {
+            const response = await fetch(`${API_URL}/translate`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ source_code: code, source_lang: sourceLang, target_lang: targetLang })
@@ -54,4 +56,3 @@
 
 </body>
 </html>
-
