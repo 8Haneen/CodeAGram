@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Code Converter</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        textarea { width: 80%; height: 100px; margin: 10px; }
+        select, button { padding: 10px; margin: 10px; }
+    </style>
+</head>
+<body>
+
+    <h2>AI Code Converter</h2>
+    
+    <textarea id="codeInput" placeholder="Enter code here..."></textarea><br>
+    
+    <label>Convert from:</label>
+    <select id="sourceLang">
+        <option>Python</option>
+        <option>JavaScript</option>
+        <option>C++</option>
+    </select>
+    
+    <label>To:</label>
+    <select id="targetLang">
+        <option>JavaScript</option>
+        <option>Python</option>
+        <option>C++</option>
+    </select>
+    
+    <br><button onclick="translateCode()">Translate</button>
+    
+    <h3>Translated Code:</h3>
+    <pre id="output"></pre>
+
+    <script>
+        async function translateCode() {
+            const code = document.getElementById("codeInput").value;
+            const sourceLang = document.getElementById("sourceLang").value;
+            const targetLang = document.getElementById("targetLang").value;
+
+            const response = await fetch("http://127.0.0.1:8000/translate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ source_code: code, source_lang: sourceLang, target_lang: targetLang })
+            });
+
+            const result = await response.json();
+            document.getElementById("output").innerText = result.translated_code || "Error!";
+        }
+    </script>
+
+</body>
+</html>
+
