@@ -19,12 +19,6 @@ Ever struggled with a LeetCode problem that was too hard, so you looked up a sol
 ## 💡 Why GPT-4?  
 GPT-4 provides **accurate** and **context-aware** translations, ensuring that syntax, logic, and best practices are maintained across different programming languages.
 
-## 🚀 Getting Started  
-### 📥 Clone the Repository  
-```sh
-git clone https://github.com/sololitaum/CodeAGram.git
-cd CodeAGram
-
 ## 🛠️ Features  
 ---
 ✔️ **Instant Code Conversion**  
@@ -32,10 +26,15 @@ cd CodeAGram
 ✔️ **AI-Powered Accuracy**  
 ✔️ **Simple UI for Ease of Use**  
 
-## 🤝 Contributing  
----
-Want to contribute? Fork the repo and submit a PR!  
-
 ## 📄 License  
 ---
 This project is licensed under the **MIT License**.  
+
+## 🚀 Getting Started  
+### 📥 Clone the Repository  
+```sh
+git clone https://github.com/sololitaum/CodeAGram.git
+cd CodeAGram
+
+
+ 
