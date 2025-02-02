@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 CodeAGram</title>
+    <style>
+        /* Gradient Background */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            text-align: center;
+        }
+
+        /* Stylish Header */
+        h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* Styled Textarea */
+        textarea {
+            width: 80%;
+            height: 120px;
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            resize: none;
+            background: #ffffff;
+            color: #333;
+        }
+
+        /* Dropdown & Button Styling */
+        select, button {
+            padding: 12px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        select {
+            background: white;
+            color: #333;
+        }
+
+        /* Button Style */
+        button {
+            background: #ff9800;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #e68900;
+        }
+
+        /* Output Box (Fix for Left-Aligned Text) */
+        #output {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            white-space: pre-wrap; /* Ensures line breaks are preserved */
+            word-wrap: break-word;
+            text-align: left; /* Left-align the translated code */
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🚀 CodeAGram 💌</h2>
+
+    <textarea id="codeInput" placeholder="Enter your code here... ✨"></textarea><br>
+
+    <label>🔄 Convert from:</label>
+    <select id="sourceLang">
+        <option>Python 🐍</option>
+        <option>JavaScript ⚡</option>
+        <option>C++ 💻</option>
+    </select>
+
+    <label>➡️ To:</label>
+    <select id="targetLang">
+        <option>JavaScript ⚡</option>
+        <option>Python 🐍</option>
+        <option>C++ 💻</option>
+    </select>
+
+    <br><button onclick="translateCode()">🔄 Translate Code</button>
+
+    <h3>🎯 Translated Code:</h3>
+    <pre id="output">Waiting for input... ✨</pre>
+
+    <script>
+        async function translateCode() {
+            const code = document.getElementById("codeInput").value;
+            const sourceLang = document.getElementById("sourceLang").value;
+            const targetLang = document.getElementById("targetLang").value;
+
+            if (!code.trim()) {
+                document.getElementById("output").innerText = "⚠️ Please enter some code!";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://127.0.0.1:8000/translate", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ code: code, source_language: sourceLang, target_language: targetLang })
+                });
+
+                const result = await response.json();
+                document.getElementById("output").innerText = result.translated_code || "❌ Error!";
+            } catch (error) {
+                document.getElementById("output").innerText = "⚠️ Server error! Check your connection.";
+            }
+        }
+    </script>
+
+</body>
+</html>
